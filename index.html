@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Личный кабинет</title>
+
+		<!-- Шрифт Inter -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- Стили -->
+		<link rel="stylesheet" href="dashboard.css" />
+
+		<!-- Иконки Font Awesome -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+		/>
+	</head>
+	<body>
+		<div class="container">
+			<!-- Боковая панель -->
+			<aside class="sidebar">
+				<img src="logo.png" alt="Герб" class="logo" />
+
+				<ul class="menu">
+					<li>
+						<a href="dashboard.html"
+							><i class="fas fa-th-large"></i><span>Услуги</span></a
+						>
+					</li>
+					<li>
+						<a href="requests.html"
+							><i class="fas fa-file-alt"></i><span>Поданные заявки</span></a
+						>
+					</li>
+					<li>
+						<a href="workflow.html">
+							<i class="fas fa-network-wired"></i><span>Потоки работ</span>
+							<span class="badge">65</span>
+						</a>
+					</li>
+					<li>
+						<a href="instructions.html"
+							><i class="fas fa-book"></i><span>Инструкции</span></a
+						>
+					</li>
+					<li>
+						<a href="digital-cert.html"
+							><i class="fas fa-certificate"></i><span>Digital CERT</span></a
+						>
+					</li>
+					<li>
+						<a href="support.html"
+							><i class="fas fa-headset"></i><span>Служба поддержки</span></a
+						>
+					</li>
+					<li>
+						<a href="news.html">
+							<i class="fas fa-bullhorn"></i><span>Объявления</span>
+							<span class="badge">4</span>
+						</a>
+					</li>
+				</ul>
+
+				<div class="lang-exit">
+					<div class="lang-switch">
+						<img
+							src="https://flagcdn.com/w40/ru.png"
+							alt="RU"
+							title="Русский"
+						/>
+						<img src="https://flagcdn.com/w40/kz.png" alt="KZ" width="22" />
+					</div>
+					<a href="#"><i class="fas fa-sign-out-alt"></i> Выход</a>
+				</div>
+			</aside>
+
+			<!-- Основная часть -->
+			<main class="main-content">
+				<div class="top-bar">
+					<span class="username">Амиров Айдын</span>
+				</div>
+
+				<h2 class="section-title">Услуги</h2>
+
+				<div class="services-grid">
+					<div class="service-card">
+						<i class="fas fa-bookmark"></i> <span>Аккредитация</span>
+					</div>
+					<div class="service-card">
+						<i class="fas fa-shield-alt"></i>
+						<span>Государственный контроль</span>
+					</div>
+					<div class="service-card">
+						<i class="fas fa-database"></i> <span>Казстандарт</span>
+					</div>
+					<div class="service-card">
+						<i class="fas fa-ruler"></i> <span>Метрология</span>
+					</div>
+					<div class="service-card">
+						<i class="fas fa-check-circle"></i> <span>Оценка соответствия</span>
+					</div>
+					<div class="service-card">
+						<i class="fas fa-list"></i> <span>Стандартизация</span>
+					</div>
+					<div class="service-card">
+						<i class="fas fa-flag"></i> <span>Разработан в Казахстане</span>
+					</div>
+					<div class="service-card">
+						<i class="fas fa-bullhorn"></i> <span>Официальные объявления</span>
+					</div>
+				</div>
+			</main>
+		</div>
+	</body>
+</html>

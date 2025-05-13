@@ -1,0 +1,397 @@
+/* Подключи Inter в <head> HTML: */
+body {
+	margin: 0;
+	font-family: 'Inter', sans-serif;
+	background-color: #f8f8f8;
+}
+
+.container {
+	display: flex;
+	height: 100vh;
+	overflow: hidden;
+}
+
+/* ---------------------- */
+/* БОКОВАЯ ПАНЕЛЬ */
+.sidebar {
+	width: 250px;
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	border-right: 1px solid #eee;
+}
+
+.logo {
+	width: 60px;
+	margin: 20px auto;
+}
+
+/* Меню */
+.menu {
+	list-style: none;
+	padding: 0 15px;
+	flex: 1;
+}
+
+.menu li {
+	display: flex;
+	align-items: center;
+	font-size: 15px;
+	padding: 12px 12px;
+	color: #333;
+	border-radius: 8px;
+	margin: 5px 0;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+.menu li:hover,
+.menu li.active {
+	background-color: #f2fdf7;
+	color: #30c96d;
+	font-weight: 500;
+}
+
+.menu li i {
+	margin-right: 10px;
+	color: #30c96d;
+	width: 18px;
+	text-align: center;
+}
+
+.badge {
+	margin-left: auto;
+	background-color: #30c96d;
+	color: white;
+	font-size: 12px;
+	padding: 2px 8px;
+	border-radius: 10px;
+}
+
+/* ---------------------- */
+/* НИЖНИЙ ЯЗЫК + ВЫХОД */
+.lang-exit {
+	padding: 10px 15px;
+	font-size: 13px;
+	border-top: 1px solid #eee;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	margin-top: auto;
+}
+
+.lang-switch {
+	display: flex;
+	gap: 8px;
+}
+
+.lang-switch img {
+	width: 22px;
+	height: auto;
+	cursor: pointer;
+}
+
+.lang-exit a {
+	text-decoration: none;
+	color: #666;
+	font-size: 13px;
+}
+
+.lang-exit a:hover {
+	color: #30c96d;
+}
+
+/* ---------------------- */
+/* ОСНОВНОЙ КОНТЕНТ */
+.main-content {
+	flex: 1;
+	padding: 30px;
+	background-color: #fff;
+	overflow-y: auto;
+}
+
+.top-bar {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 10px 20px;
+	margin-bottom: 25px;
+	border-bottom: 1px solid #f0f0f0;
+	background-color: #fff;
+}
+.section-title {
+	margin-bottom: 25px;
+	font-size: 20px;
+	color: #222;
+	font-weight: 600;
+}
+
+/* ---------------------- */
+/* КАРТОЧКИ */
+.services-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+	gap: 25px;
+}
+
+.service-card {
+	background-color: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 12px;
+	padding: 24px;
+	text-align: center;
+	color: #30c96d;
+	font-weight: 600;
+	font-size: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+	cursor: pointer;
+	transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.service-card i {
+	font-size: 24px;
+}
+
+.service-card:hover {
+	background-color: #f2fdf7;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+.lang-exit {
+	padding: 15px 15px 10px;
+	font-size: 14px;
+	text-align: center;
+	border-top: 1px solid #eee;
+}
+
+.lang-switch {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.lang-switch img {
+	width: 22px;
+	height: 16px;
+	border-radius: 3px;
+	cursor: pointer;
+	transition: transform 0.2s;
+}
+
+.lang-switch img:hover {
+	transform: scale(1.1);
+}
+
+.lang-exit a {
+	text-decoration: none;
+	color: #333;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-weight: 500;
+	font-size: 14px;
+	transition: color 0.2s;
+}
+
+.lang-exit a i {
+	font-size: 14px;
+	color: #30c96d;
+}
+
+.lang-exit a:hover {
+	color: #30c96d;
+}
+.username {
+	font-size: 16px;
+	font-weight: 500;
+	color: #222;
+}
+.menu li a {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	color: inherit;
+	width: 100%;
+}
+
+.menu li a:hover {
+	color: #30c96d;
+}
+.menu li a {
+	display: flex;
+	align-items: center;
+	padding: 10px 12px;
+	border-radius: 8px;
+	text-decoration: none;
+	color: #333;
+	font-size: 15px;
+	transition: background-color 0.2s, color 0.2s;
+}
+
+.menu li a i {
+	margin-right: 10px;
+	color: #30c96d;
+	width: 18px;
+	text-align: center;
+}
+
+.menu li a:hover {
+	background-color: #f2fdf7;
+	color: #30c96d;
+}
+
+.menu li a:hover i {
+	color: #30c96d;
+}
+.menu li a {
+	display: flex;
+	align-items: center;
+	padding: 10px 12px;
+	border-radius: 8px;
+	text-decoration: none; /* 🔧 убираем подчёркивание */
+	color: #333; /* 🔧 чёрный текст */
+	font-size: 15px;
+	transition: 0.2s;
+}
+
+.menu li a i {
+	margin-right: 10px;
+	color: #30c96d;
+	width: 18px;
+	text-align: center;
+}
+
+.menu li a:hover {
+	background-color: #f2fdf7;
+	color: #30c96d;
+}
+
+.menu li a:hover i {
+	color: #30c96d;
+}
+.form-box {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	max-width: 600px;
+}
+
+.form-box label {
+	font-weight: 500;
+	margin-bottom: 5px;
+	color: #333;
+}
+
+.form-box input,
+.form-box textarea {
+	padding: 10px;
+	font-size: 14px;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+}
+
+.form-box button {
+	background-color: #30c96d;
+	color: white;
+	font-weight: 500;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	margin-top: 10px;
+}
+
+.form-box button:hover {
+	background-color: #28b15d;
+}
+.menu {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.menu li {
+	margin: 6px 0;
+}
+
+.menu li a {
+	display: flex;
+	align-items: center;
+	gap: 10px; /* ✅ Расстояние между иконкой и текстом */
+	padding: 10px 12px;
+	border-radius: 8px;
+	text-decoration: none;
+	color: #333;
+	font-size: 15px;
+	transition: 0.2s;
+}
+
+.menu li a i {
+	width: 20px; /* ✅ Ровное выравнивание иконок */
+	text-align: center;
+	color: #30c96d;
+}
+
+.menu li a:hover {
+	background-color: #f2fdf7;
+	color: #30c96d;
+}
+
+.menu li a:hover i {
+	color: #30c96d;
+}
+
+.menu .badge {
+	margin-left: auto;
+	background-color: #30c96d;
+	color: white;
+	font-size: 12px;
+	padding: 2px 6px;
+	border-radius: 10px;
+}
+.menu li {
+	margin: 8px 0;
+}
+
+.menu li a {
+	display: flex;
+	align-items: center;
+	padding: 10px 12px;
+	border-radius: 8px;
+	text-decoration: none;
+	color: #333;
+	font-size: 15px;
+	transition: 0.2s;
+}
+
+.menu li a i {
+	margin-right: 10px;
+	color: #30c96d;
+	width: 18px;
+	text-align: center;
+}
+
+.menu li a:hover,
+.menu li.active a {
+	background-color: #f2fdf7;
+	color: #30c96d;
+	font-weight: 500;
+}
+
+.menu li a:hover i,
+.menu li.active a i {
+	color: #30c96d;
+}
+
+.menu .badge {
+	margin-left: auto;
+	background-color: #30c96d;
+	color: white;
+	font-size: 12px;
+	padding: 2px 6px;
+	border-radius: 10px;
+}

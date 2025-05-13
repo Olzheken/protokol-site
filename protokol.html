@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Электронный протокол</title>
+		<link rel="stylesheet" href="dashboard.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<div class="container">
+			<!-- Боковое меню -->
+			<aside class="sidebar">
+				<img src="logo.png" alt="Герб" class="logo" />
+				<ul class="menu">
+					<li>
+						<a href="dashboard.html"
+							><i class="fas fa-th-large"></i><span>Услуги</span></a
+						>
+					</li>
+					<li>
+						<a href="requests.html"
+							><i class="fas fa-file-alt"></i><span>Поданные заявки</span></a
+						>
+					</li>
+					<li>
+						<a href="workflow.html"
+							><i class="fas fa-network-wired"></i><span>Потоки работ</span
+							><span class="badge">65</span></a
+						>
+					</li>
+					<li>
+						<a href="instructions.html"
+							><i class="fas fa-book"></i><span>Инструкции</span></a
+						>
+					</li>
+					<li>
+						<a href="digital-cert.html"
+							><i class="fas fa-certificate"></i><span>Digital CERT</span></a
+						>
+					</li>
+					<li>
+						<a href="support.html"
+							><i class="fas fa-headset"></i><span>Служба поддержки</span></a
+						>
+					</li>
+					<li>
+						<a href="news.html"
+							><i class="fas fa-bullhorn"></i><span>Объявления</span
+							><span class="badge">4</span></a
+						>
+					</li>
+				</ul>
+
+				<div class="lang-exit">
+					<div class="lang-switch">
+						<img
+							src="https://flagcdn.com/w40/ru.png"
+							alt="RU"
+							title="Русский"
+						/>
+						<img
+							src="https://flagcdn.com/w40/kz.png"
+							alt="KAZ"
+							title="Қазақша"
+						/>
+					</div>
+					<a href="#"><i class="fas fa-sign-out-alt"></i> Выход</a>
+				</div>
+			</aside>
+
+			<!-- Контент -->
+			<main class="main-content">
+				<div class="top-bar">
+					<span class="username">Амиров Айдын</span>
+				</div>
+
+				<h2 class="section-title">Электронный протокол</h2>
+
+				<form action="#" method="post" class="form-box">
+					<label for="company">Название организации:</label>
+					<input type="text" id="company" name="company" required />
+
+					<label for="date">Дата проверки:</label>
+					<input type="date" id="date" name="date" required />
+
+					<label for="result">Результаты проверки:</label>
+					<textarea id="result" name="result" rows="4" required></textarea>
+
+					<label for="fio">ФИО специалиста:</label>
+					<input type="text" id="fio" name="fio" required />
+
+					<button type="submit">Сохранить протокол</button>
+				</form>
+			</main>
+		</div>
+	</body>
+</html>

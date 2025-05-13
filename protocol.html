@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Протокол</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<h2>Форма протокола</h2>
+		<form action="save.php" method="POST">
+			<label>Название организации:</label><br />
+			<input type="text" name="company" required /><br /><br />
+
+			<label>Дата проверки:</label><br />
+			<input type="date" name="date" required /><br /><br />
+
+			<label>Результаты проверки:</label><br />
+			<textarea name="result" required></textarea><br /><br />
+
+			<label>ФИО специалиста:</label><br />
+			<input type="text" name="fio" required /><br /><br />
+
+			<button type="submit">Отправить протокол</button>
+		</form>
+	</body>
+</html>

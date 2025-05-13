@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Оформление электронного ключа</title>
+		<link rel="stylesheet" href="dashboard.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<div class="container">
+			<!-- Боковое меню -->
+			<aside class="sidebar">
+				<img src="logo.png" alt="Герб" class="logo" />
+				<ul class="menu">
+					<li>
+						<a href="dashboard.html"><i class="fas fa-th-large"></i> Услуги</a>
+					</li>
+					<li>
+						<a href="requests.html"
+							><i class="fas fa-file-alt"></i> Поданные заявки</a
+						>
+					</li>
+					<li>
+						<a href="workflow.html"
+							><i class="fas fa-network-wired"></i> Потоки работ
+							<span class="badge">65</span></a
+						>
+					</li>
+					<li>
+						<a href="instructions.html"
+							><i class="fas fa-book"></i> Инструкции</a
+						>
+					</li>
+					<li>
+						<a href="digital-cert.html"
+							><i class="fas fa-certificate"></i> Digital CERT</a
+						>
+					</li>
+					<li>
+						<a href="support.html"
+							><i class="fas fa-headset"></i> Служба поддержки</a
+						>
+					</li>
+					<li>
+						<a href="news.html"
+							><i class="fas fa-bullhorn"></i> Объявления
+							<span class="badge">4</span></a
+						>
+					</li>
+				</ul>
+				<div class="lang-exit">
+					<div class="lang-switch">
+						<img src="https://flagcdn.com/w40/ru.png" alt="RU" />
+						<img src="https://flagcdn.com/w40/kz.png" alt="KZ" />
+					</div>
+					<a href="#"><i class="fas fa-sign-out-alt"></i> Выход</a>
+				</div>
+			</aside>
+
+			<!-- Основной контент -->
+			<main class="main-content">
+				<div class="top-bar"><span class="username">Амиров Айдын</span></div>
+				<h2 class="section-title">Редактирование протокола</h2>
+
+				<form id="editForm" class="form-box">
+					<label>📄 Загрузить файл протокола (PDF):</label>
+					<input type="file" id="protocolFile" accept=".pdf" required />
+
+					<label>✍️ Загрузить изображение подписи:</label>
+					<input
+						type="file"
+						id="signatureImage"
+						accept="image/png, image/jpeg"
+						required
+					/>
+
+					<label>📌 Загрузить изображение печати:</label>
+					<input
+						type="file"
+						id="stampImage"
+						accept="image/png, image/jpeg"
+						required
+					/>
+
+					<label>🔐 Загрузить файл ЭЦП (не используется для PDF):</label>
+					<input type="file" id="certFile" accept=".p12,.pfx" required />
+
+					<button type="submit">Сохранить данные</button>
+				</form>
+
+				<!-- Предпросмотр -->
+				<div id="preview" style="display: none; margin-top: 30px">
+					<h3>📄 Предпросмотр</h3>
+					<p><strong>Подпись:</strong></p>
+					<img id="signaturePreview" style="max-width: 200px" />
+					<p><strong>Печать:</strong></p>
+					<img id="stampPreview" style="max-width: 200px" />
+				</div>
+
+				<!-- Кнопка скачать -->
+				<div id="downloadSection" style="display: none; margin-top: 20px">
+					<button type="button" onclick="generatePDF()">
+						📥 Скачать протокол
+					</button>
+				</div>
+			</main>
+		</div>
+
+		<!-- Подключаем pdf-lib и инициализируем -->
+		<script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+		<script>
+			const { PDFDocument, StandardFonts } = PDFLib
+		</script>
+
+		<script>
+			let signatureDataURL, stampDataURL
+
+			document
+				.getElementById('editForm')
+				.addEventListener('submit', function (e) {
+					e.preventDefault()
+
+					const signatureFile =
+						document.getElementById('signatureImage').files[0]
+					const stampFile = document.getElementById('stampImage').files[0]
+
+					if (!signatureFile || !stampFile) {
+						alert('Пожалуйста, загрузите изображение подписи и печати.')
+						return
+					}
+
+					const reader1 = new FileReader()
+					const reader2 = new FileReader()
+
+					reader1.onload = function (e1) {
+						signatureDataURL = e1.target.result
+						document.getElementById('signaturePreview').src = signatureDataURL
+
+						reader2.onload = function (e2) {
+							stampDataURL = e2.target.result
+							document.getElementById('stampPreview').src = stampDataURL
+
+							document.getElementById('preview').style.display = 'block'
+							document.getElementById('downloadSection').style.display = 'block'
+							alert('Данные сохранены. Теперь вы можете скачать протокол.')
+						}
+
+						reader2.readAsDataURL(stampFile)
+					}
+
+					reader1.readAsDataURL(signatureFile)
+				})
+
+			async function generatePDF() {
+				try {
+					const protocolFile = document.getElementById('protocolFile').files[0]
+					if (!protocolFile) {
+						alert('Сначала загрузите PDF файл протокола.')
+						return
+					}
+
+					const reader = new FileReader()
+					reader.onload = async function (e) {
+						try {
+							const existingPdfBytes = e.target.result
+							const pdfDoc = await PDFDocument.load(existingPdfBytes)
+
+							const sigBytes = await fetch(signatureDataURL).then(r =>
+								r.arrayBuffer()
+							)
+							const stampBytes = await fetch(stampDataURL).then(r =>
+								r.arrayBuffer()
+							)
+
+							const signatureImg = await pdfDoc.embedPng(sigBytes)
+							const stampImg = await pdfDoc.embedPng(stampBytes)
+
+							const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
+							const pages = pdfDoc.getPages()
+							const lastPage = pages[pages.length - 1]
+
+							// Координаты (можно подогнать под твой шаблон)
+							lastPage.drawImage(signatureImg, {
+								x: 100,
+								y: 90,
+								width: 100,
+								height: 40,
+							})
+							lastPage.drawText('Инженер испытатель:   Семибай А.Б.', {
+								x: 100,
+								y: 75,
+								size: 10,
+								font: font,
+							})
+							lastPage.drawImage(stampImg, {
+								x: 270,
+								y: 60,
+								width: 80,
+								height: 80,
+							})
+
+							const pdfBytes = await pdfDoc.save()
+							const blob = new Blob([pdfBytes], { type: 'application/pdf' })
+
+							const link = document.createElement('a')
+							link.href = URL.createObjectURL(blob)
+							link.download = 'Готовый_протокол.pdf'
+							document.body.appendChild(link)
+							link.click()
+							document.body.removeChild(link)
+						} catch (err) {
+							console.error('Ошибка при формировании PDF:', err)
+							alert('Произошла ошибка при создании PDF. Смотрите консоль.')
+						}
+					}
+
+					reader.readAsArrayBuffer(protocolFile)
+				} catch (error) {
+					console.error('Ошибка генерации PDF:', error)
+					alert('Ошибка генерации PDF')
+				}
+			}
+		</script>
+	</body>
+</html>
