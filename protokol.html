@@ -12,6 +12,61 @@
 			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
 			rel="stylesheet"
 		/>
+		<style>
+			.block {
+				border: 1px solid #ccc;
+				padding: 15px;
+				margin-bottom: 20px;
+				border-radius: 8px;
+				background: #f9f9f9;
+			}
+			.block label {
+				font-weight: 500;
+				display: block;
+				margin-top: 10px;
+			}
+			.block input,
+			.block textarea,
+			.block select {
+				width: 100%;
+				padding: 6px;
+				margin-top: 5px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				font-family: inherit;
+			}
+			.btn-group {
+				margin-top: 20px;
+			}
+			.btn-group button {
+				margin-right: 10px;
+				padding: 10px 20px;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				font-weight: bold;
+			}
+			.btn-add {
+				background-color: #2ecc71;
+				color: white;
+			}
+			.btn-delete {
+				background-color: #e74c3c;
+				color: white;
+			}
+			.btn-pdf {
+				background-color: #3498db;
+				color: white;
+			}
+			.btn-word {
+				background-color: #7f8c8d;
+				color: white;
+			}
+			.btn-check {
+				background-color: #2980b9;
+				color: white;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="container">
@@ -57,48 +112,106 @@
 						>
 					</li>
 				</ul>
-
 				<div class="lang-exit">
 					<div class="lang-switch">
-						<img
-							src="https://flagcdn.com/w40/ru.png"
-							alt="RU"
-							title="Русский"
-						/>
-						<img
-							src="https://flagcdn.com/w40/kz.png"
-							alt="KAZ"
-							title="Қазақша"
-						/>
+						<img src="https://flagcdn.com/w40/ru.png" alt="RU" />
+						<img src="https://flagcdn.com/w40/kz.png" alt="KZ" />
 					</div>
 					<a href="#"><i class="fas fa-sign-out-alt"></i> Выход</a>
 				</div>
 			</aside>
 
-			<!-- Контент -->
+			<!-- Основной контент -->
 			<main class="main-content">
-				<div class="top-bar">
-					<span class="username">Амиров Айдын</span>
-				</div>
-
+				<div class="top-bar"><span class="username">Амиров Айдын</span></div>
 				<h2 class="section-title">Электронный протокол</h2>
 
-				<form action="#" method="post" class="form-box">
-					<label for="company">Название организации:</label>
-					<input type="text" id="company" name="company" required />
+				<div id="protocolContainer">
+					<!-- Протокол блоки будут здесь -->
+				</div>
 
-					<label for="date">Дата проверки:</label>
-					<input type="date" id="date" name="date" required />
-
-					<label for="result">Результаты проверки:</label>
-					<textarea id="result" name="result" rows="4" required></textarea>
-
-					<label for="fio">ФИО специалиста:</label>
-					<input type="text" id="fio" name="fio" required />
-
-					<button type="submit">Сохранить протокол</button>
-				</form>
+				<div class="btn-group">
+					<button class="btn-add" onclick="addBlock()">
+						+ Добавить строку
+					</button>
+					<button class="btn-check">Проверить соответствие</button>
+					<button class="btn-pdf">Скачать PDF</button>
+					<button class="btn-word">Скачать Word</button>
+				</div>
 			</main>
 		</div>
+
+		<script>
+			let blockCount = 0
+
+			function addBlock() {
+				blockCount++
+				const container = document.getElementById('protocolContainer')
+
+				const block = document.createElement('div')
+				block.className = 'block'
+				block.innerHTML = `
+					<h4>Номер записи: ${blockCount}</h4>
+		
+					<label>Наименование организации:</label>
+					<input type="text" value="ТОО АЙДЫН" />
+		
+					<label>Изготовитель:</label>
+					<input type="text" value="Goetze KG Armaturen" />
+		
+					<label>Код ТН ВЭД:</label>
+					<input type="text" value="0207 12.100" />
+		
+					<label>Наименование продукции:</label>
+					<textarea rows="2">Филе куриное замороженное</textarea>
+		
+					<label>Количество образцов:</label>
+					<input type="text" value="1 шт." />
+		
+					<label>Условия проведения испытаний:</label>
+					<div style="display: flex; gap: 10px; flex-wrap: wrap;">
+						<input type="text" placeholder="Температура (°С)" />
+						<input type="text" placeholder="Влажность (%)" />
+						<input type="text" placeholder="Давление (мм рт. ст.)" />
+					</div>
+		
+					<label>Место проведения испытаний:</label>
+					<textarea rows="3">Испытательная лаборатория ТОО «НИЦ БП», Республика Казахстан, г. Алматы, Ауэзовский р-н, пр. Райымбека, 348/1.</textarea>
+		
+					<label>Нормативные документы (ТР ТС):</label>
+					<select multiple>
+						<option selected>ТР ТС 004/2011</option>
+						<option selected>ТР ТС 020/2011</option>
+						<option selected>ТР ТС 010/2011</option>
+					</select>
+		
+					<label>Нормативные документы (ГОСТ):</label>
+					<input type="text" value="ГОСТ 31986-2012" />
+		
+					<label>Документы на метод:</label>
+					<input type="text" value="ГОСТ 31986-2012" />
+		
+					<label>Метод испытаний:</label>
+					<input type="text" value="ГОСТ 31986-2012" />
+		
+					<label>Пункт метода:</label>
+					<input type="text" value="5:4" />
+		
+					<label>Дата поступления в ИЦ:</label>
+					<input type="date" value="2024-09-16" />
+		
+					<label>Дата начала испытания:</label>
+					<input type="date" value="2024-09-17" />
+		
+					<label>Дата окончания испытания:</label>
+					<input type="date" value="2024-09-25" />
+		
+					<button class="btn-delete" onclick="this.parentElement.remove()">Удалить</button>
+				`
+				container.appendChild(block)
+			}
+
+			window.onload = () => addBlock()
+		</script>
 	</body>
 </html>
