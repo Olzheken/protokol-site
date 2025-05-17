@@ -146,124 +146,214 @@
 					<button class="btn-pdf" onclick="downloadPDF()">Скачать PDF</button>
 					<button class="btn-word">Скачать Word</button>
 				</div>
+
+				<script>
+					let blockCount = 0
+
+					function addBlock() {
+						blockCount++
+						const container = document.getElementById('protocolContainer')
+
+						const block = document.createElement('div')
+						block.className = 'block'
+						block.innerHTML = `
+							<h4>Номер записи: ${blockCount}</h4>
+							<label>Наименование организации:</label>
+							<input type="text" value="ТОО АЙДЫН" />
+							<label>Изготовитель:</label>
+							<input type="text" value="Goetze KG Armaturen" />
+							<label>Код ТН ВЭД:</label>
+							<input type="text" value="0207 12.100" />
+							<label>Наименование продукции:</label>
+							<textarea rows="2">Филе куриное замороженное</textarea>
+							<label>Количество образцов:</label>
+							<input type="text" value="1 шт." />
+							<label>Условия проведения испытаний:</label>
+							<div style="display: flex; gap: 10px; flex-wrap: wrap;">
+								<input type="text" placeholder="Температура (°С)" />
+								<input type="text" placeholder="Влажность (%)" />
+								<input type="text" placeholder="Давление (мм рт. ст.)" />
+							</div>
+							<label>Место проведения испытаний:</label>
+							<textarea rows="3">Испытательная лаборатория ТОО «НИЦ БП», Республика Казахстан, г. Алматы, Ауэзовский р-н, пр. Райымбека, 348/1.</textarea>
+							<label>Дата поступления в ИЦ:</label>
+							<input type="date" value="2024-09-16" />
+							<label>Дата начала испытания:</label>
+							<input type="date" value="2024-09-17" />
+							<label>Дата окончания испытания:</label>
+							<input type="date" value="2024-09-25" />
+							<label>Нормативные документы (ТР ТС):</label>
+							<select multiple class="tr-select">
+								<option>ТР ТС 004/2011</option>
+								<option>ТР ТС 020/2011</option>
+								<option>ТР ТС 010/2011</option>
+							</select>
+							<label>Нормативные документы (ГОСТ):</label>
+							<select multiple class="gost-select">
+								<option>ГОСТ 12.2.136-98</option>
+								<option>ГОСТ 33670-2015</option>
+								<option>ГОСТ 4666-2015</option>
+								<option>ГОСТ 31294-2005</option>
+							</select>
+	
+							
+	
+							<div class="norms-gost" style="display: none; margin-top: 20px;">
+								<h4>Нормы по ГОСТ 12.2.136-98</h4>
+								<table class="normTable">
+        <thead>
+          <tr>
+            <th>Пункты по НД</th>
+            <th>Фактический результат</th>
+            <th>Соответствие требованиям</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-min="120">ГОСТ 12.2.136-98
+п.4.4.3
+Тормозное устройство должно иметь конструкцию, обеспечивающую его работу при усилии, прикладываемом к тормозной рукоятке, не превышающем 150 Н. 
+Местонахождение рукоятки тормозного устройства должно исключать возможность травмирования рабочего в процессе работы и быть удобным для технического обслуживания.
+</td>
+            <td><input type="number" class="fact-input" /></td>
+            <td style="text-align: center;"><input type="checkbox" class="check" disabled /></td>
+          </tr>
+          <tr>
+            <td data-max="10">ГОСТ 12.2.136-98
+п.4.4.4
+Прополочный канат подвески устьевого штока должен иметь коэффициент запаса прочности (отношение разрывного усилия к номинальной нагрузке) не менее 5.
+Концы каната должны быть заделаны.
+</td>
+            <td><input type="number" class="fact-input" /></td>
+            <td style="text-align: center;"><input type="checkbox" class="check" disabled /></td>
+          </tr>
+          <tr>
+            <td data-min="70">ГОСТ 12.2.136-98
+п.4.4.7.1
+Расстояние от переднего плеча балансира станка-качалки при откинутой в сторону или
+наверх головке балансира до оси скважины должно быть не менее:
+250 мм — для станков-качалок с наибольшей допускаемой нагрузкой на устьевой шток до 30 кН:
+500 мм — для станков-качалок с наибольшей допускаемой нагрузкой на устьевой шток свыше 30 кН
+</td>
+            <td><input type="number" class="fact-input" /></td>
+            <td style="text-align: center;"><input type="checkbox" class="check" disabled /></td>
+          </tr>
+          <tr>
+            <td data-max="1000">ГОСТ 12.2.136-98
+п.4.5.1.1	Органы ручного воздействия на вводный выключатель штангонасосного привода должны находиться снаружи электрошкафа и располагаться на высоте не менее 600 мм и не более 1600 мм.
+Установка вводного выключателя на дверцах шкафа не допускается. 
+</td>
+            <td><input type="number" class="fact-input" /></td>
+            <td style="text-align: center;"><input type="checkbox" class="check" disabled /></td>
+          </tr>
+          <tr>
+            <td data-max="95">ГОСТ 12.2.136-98
+п.4.5.2.1	Кривошипно-шатунный механизм штангонасосного привода должен иметь ограждение на всю зону вращения кривошипа.
+При установке ограждения на расстояние 350 мм и более от кривошипно-шатунного механизма оно может быть выполнено в виде перил, а на расстояние менее 350 мм должно быть сплошным или сетчатым в металлической оправе. Высота перильного ограждения — не менее 1,2 м; высота сетчатого ограждения - не менее 1.8 м.
+</td>
+	 <td><input type="number" class="fact-input" /></td>
+            <td style="text-align: center;"><input type="checkbox" class="check" disabled /></td>
+          </tr>
+          <tr>
+            <td data-min="0">ГОСТ 12.2.136-98
+п.4.5.2.3	Над канатным шкивом безбалансирного станка должен быть установлен кожух, при этом зазор между кожухом и ребордой канатного шкива должен быть не более 0.3 диаметра канатам. 
+
+</td>
+            <td><input type="number" class="fact-input" /></td>
+            <td style="text-align: center;"><input type="checkbox" class="check" disabled /></td>
+          </tr>
+          <tr>
+            <td data-min="0">ГОСТ 12.2.136-98
+п.4.5.3	Приводы штангонасосных установок следует оснашать лестницами для обслуживания узлов, находящихся на высоте 0.75 м и выше над уровнем рамы.
+
+</td>
+            <td><input type="number" class="fact-input" /></td>
+            <td style="text-align: center;"><input type="checkbox" class="check" disabled /></td>
+          </tr>
+          <tr>
+            <td data-min="0">ГОСТ 12.1.003-2014	ГОСТ 12.2.136-98 п.4.2.2
+Уровень звукового давления при установившемся режиме работы привода штангонасосной установки не должен превышать 90 дБА.
+
+</td>
+          
+         
+            <td><input type="number" class="fact-input" /></td>
+            <td style="text-align: center;"><input type="checkbox" class="check" disabled /></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+	
+							<button class="btn-delete" onclick="this.parentElement.remove()">Удалить</button>
+						`
+						container.appendChild(block)
+
+						const trSelect = block.querySelector('.tr-select')
+						const gostSelect = block.querySelector('.gost-select')
+						const normsBlock = block.querySelector('.norms-010')
+						const normsGost = block.querySelector('.norms-gost')
+
+						trSelect.addEventListener('change', () => {
+							const selected = Array.from(trSelect.selectedOptions).map(opt =>
+								opt.textContent.trim()
+							)
+							normsBlock.style.display = selected.includes('ТР ТС 010/2011')
+								? 'block'
+								: 'none'
+						})
+
+						gostSelect.addEventListener('change', () => {
+							const selected = Array.from(gostSelect.selectedOptions).map(opt =>
+								opt.textContent.trim()
+							)
+							normsGost.style.display = selected.includes('ГОСТ 12.2.136-98')
+								? 'block'
+								: 'none'
+						})
+					}
+
+					function downloadPDF() {
+						const content = document.querySelector('.main-content')
+						html2canvas(content, { scale: 2 }).then(canvas => {
+							const imgData = canvas.toDataURL('image/png')
+							const pdf = new jsPDF('p', 'mm', 'a4')
+							const pageWidth = pdf.internal.pageSize.getWidth()
+							const imgProps = pdf.getImageProperties(imgData)
+							const pdfHeight = (imgProps.height * pageWidth) / imgProps.width
+							const maxHeight = pdf.internal.pageSize.getHeight() - 20
+							const finalHeight = Math.min(pdfHeight, maxHeight)
+							pdf.addImage(imgData, 'PNG', 0, 10, pageWidth, finalHeight)
+							pdf.save('protocol.pdf')
+						})
+					}
+
+					function checkComplianceAll() {
+						document.querySelectorAll('.normTable').forEach(table => {
+							const rows = table.querySelectorAll('tbody tr')
+							rows.forEach(row => {
+								const normCell = row.querySelector('td')
+								const input = row.querySelector('.fact-input')
+								const checkbox = row.querySelector('.check')
+
+								const min = parseFloat(normCell.dataset.min)
+								const max = parseFloat(normCell.dataset.max)
+								const fact = parseFloat(input.value)
+
+								let ok = true
+								if (!isNaN(min) && fact < min) ok = false
+								if (!isNaN(max) && fact > max) ok = false
+
+								checkbox.checked = ok
+								row.style.backgroundColor = ok ? '#d4edda' : '#f8d7da'
+							})
+						})
+					}
+
+					document
+						.querySelector('.btn-check')
+						.addEventListener('click', checkComplianceAll)
+				</script>
 			</main>
 		</div>
-
-		<script>
-			let blockCount = 0
-
-			function addBlock() {
-				blockCount++
-				const container = document.getElementById('protocolContainer')
-
-				const block = document.createElement('div')
-				block.className = 'block'
-				block.innerHTML = `
-          <h4>Номер записи: ${blockCount}</h4>
-          <label>Наименование организации:</label>
-          <input type="text" value="ТОО АЙДЫН" />
-          <label>Изготовитель:</label>
-          <input type="text" value="Goetze KG Armaturen" />
-          <label>Код ТН ВЭД:</label>
-          <input type="text" value="0207 12.100" />
-          <label>Наименование продукции:</label>
-          <textarea rows="2">Филе куриное замороженное</textarea>
-          <label>Количество образцов:</label>
-          <input type="text" value="1 шт." />
-          <label>Условия проведения испытаний:</label>
-          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <input type="text" placeholder="Температура (°С)" />
-            <input type="text" placeholder="Влажность (%)" />
-            <input type="text" placeholder="Давление (мм рт. ст.)" />
-          </div>
-          <label>Место проведения испытаний:</label>
-          <textarea rows="3">Испытательная лаборатория ТОО «НИЦ БП», Республика Казахстан, г. Алматы, Ауэзовский р-н, пр. Райымбека, 348/1.</textarea>
-          <label>Нормативные документы (ТР ТС):</label>
-          <select multiple>
-            <option selected>ТР ТС 004/2011</option>
-            <option selected>ТР ТС 020/2011</option>
-            <option selected>ТР ТС 010/2011</option>
-						<option selected>ТР ТС 004/2011</option>
-            <option selected>ТР ТС 020/2011</option>
-            <option selected>ТР ТС 010/2011</option>
-						<option selected>ТР ТС 004/2011</option>
-            <option selected>ТР ТС 020/2011</option>
-            <option selected>ТР ТС 010/2011</option>
-						<option selected>ТР ТС 004/2011</option>
-            <option selected>ТР ТС 020/2011</option>
-            <option selected>ТР ТС 010/2011</option>
-						<option selected>ТР ТС 004/2011</option>
-            <option selected>ТР ТС 020/2011</option>
-            <option selected>ТР ТС 010/2011</option>
-						<option selected>ТР ТС 004/2011</option>
-            <option selected>ТР ТС 020/2011</option>
-            <option selected>ТР ТС 010/2011</option>
-						<option selected>ТР ТС 004/2011</option>
-            <option selected>ТР ТС 020/2011</option>
-            <option selected>ТР ТС 010/2011</option>
-						<option selected>ТР ТС 004/2011</option>
-            <option selected>ТР ТС 020/2011</option>
-            <option selected>ТР ТС 010/2011</option>
-						<option selected>ТР ТС 004/2011</option>
-            <option selected>ТР ТС 020/2011</option>
-            <option selected>ТР ТС 010/2011</option>
-						<option selected>ТР ТС 004/2011</option>
-            <option selected>ТР ТС 020/2011</option>
-            <option selected>ТР ТС 010/2011</option>
-						<option selected>ТР ТС 004/2011</option>
-            <option selected>ТР ТС 020/2011</option>
-            <option selected>ТР ТС 010/2011</option>
-						<option selected>ТР ТС 004/2011</option>
-            <option selected>ТР ТС 020/2011</option>
-            <option selected>ТР ТС 010/2011</option>
-						<option selected>ТР ТС 004/2011</option>
-            <option selected>ТР ТС 020/2011</option>
-            <option selected>ТР ТС 010/2011</option>
-						<option selected>ТР ТС 004/2011</option>
-            <option selected>ТР ТС 020/2011</option>
-            <option selected>ТР ТС 010/2011</option>
-						<option selected>ТР ТС 004/2011</option>
-            <option selected>ТР ТС 020/2011</option>
-            <option selected>ТР ТС 010/2011</option>
-          </select>
-          <label>Нормативные документы (ГОСТ):</label>
-          <input type="text" value="ГОСТ 31986-2012" />
-          <label>Документы на метод:</label>
-          <input type="text" value="ГОСТ 31986-2012" />
-          <label>Метод испытаний:</label>
-          <input type="text" value="ГОСТ 31986-2012" />
-          <label>Пункт метода:</label>
-          <input type="text" value="5:4" />
-          <label>Дата поступления в ИЦ:</label>
-          <input type="date" value="2024-09-16" />
-          <label>Дата начала испытания:</label>
-          <input type="date" value="2024-09-17" />
-          <label>Дата окончания испытания:</label>
-          <input type="date" value="2024-09-25" />
-          <button class="btn-delete" onclick="this.parentElement.remove()">Удалить</button>
-        `
-				container.appendChild(block)
-			}
-
-			window.onload = () => addBlock()
-
-			function downloadPDF() {
-				const content = document.querySelector('.main-content')
-
-				html2canvas(content, { scale: 2 }).then(canvas => {
-					const imgData = canvas.toDataURL('image/png')
-					const pdf = new jsPDF('p', 'mm', 'a4')
-					const pageWidth = pdf.internal.pageSize.getWidth()
-					const imgProps = pdf.getImageProperties(imgData)
-					const pdfHeight = (imgProps.height * pageWidth) / imgProps.width
-
-					const maxHeight = pdf.internal.pageSize.getHeight() - 20
-					const finalHeight = Math.min(pdfHeight, maxHeight)
-
-					pdf.addImage(imgData, 'PNG', 0, 10, pageWidth, finalHeight)
-					pdf.save('protocol.pdf')
-				})
-			}
-		</script>
 	</body>
 </html>
